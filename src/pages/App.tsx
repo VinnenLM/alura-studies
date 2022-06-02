@@ -3,7 +3,7 @@ import Cronometro from '../components/Cronometro';
 import Formulario from '../components/Formulario';
 import Lista from '../components/Lista';
 import { ITarefa } from '../types/tarefas';
-import style from  './style.module.scss';
+import style from './style.module.scss';
 
 function App() {
 
@@ -11,19 +11,37 @@ function App() {
 
   const [selecionado, setSelelecionado] = useState<ITarefa>();
 
-  function selecionaTarefa(tarefaSelecionada: ITarefa){
+  function selecionaTarefa(tarefaSelecionada: ITarefa) {
     setSelelecionado(tarefaSelecionada);
-    setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => ({...tarefa, selecionado: tarefa.id === tarefaSelecionada.id ? true : false})))
+    setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => ({ ...tarefa, selecionado: tarefa.id === tarefaSelecionada.id ? true : false })))
+  }
+
+  function finalizarTarefa() {
+    if (selecionado) {
+      setSelelecionado(undefined);
+      setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => {
+        if (tarefa.id === selecionado.id) {
+          return {
+            ...tarefa,
+            selecionado: false,
+            completado: true
+          }
+        }
+        return tarefa;
+      }));
+    }
   }
 
   return (
     <div className={style.AppStyle}>
       <Formulario setTarefas={setTarefas} />
-      <Lista 
-      tarefas={tarefas}
-      selecionaTarefa={selecionaTarefa}
+      <Lista
+        tarefas={tarefas}
+        selecionaTarefa={selecionaTarefa}
       />
-      <Cronometro selecionado={selecionado} />
+      <Cronometro
+        selecionado={selecionado}
+        finalizarTarefa={finalizarTarefa} />
     </div>
   );
 }
