@@ -39,6 +39,7 @@ function Cronometro({ selecionado, finalizarTarefa }: Props) {
             <Botao
                 onClick={() => regressiva(tempo)}
                 texto="Começar!"
+                type="button"
             />
         </div>
     );
