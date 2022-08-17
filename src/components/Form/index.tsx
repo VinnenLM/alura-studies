@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ITarefa } from "../../types/tarefas";
-import Botao from "../Botao";
+import Botao from "../Button";
 import form from './style.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import tempoParaSegundos from "../../common/utils/date";
 import { ITarefa } from "../../types/tarefas";
-import Botao from "../Botao";
+import Botao from "../Button";
 import Relogio from "./Relogio";
 import estilo from './style.module.scss';
 
